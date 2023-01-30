@@ -9,6 +9,7 @@ public class GameMenu : MonoBehaviour
     public GameObject[] windows;
     private CharStats[] playerStats;
     public Text[] nameText, hpText, mpText, lvlText, expText;
+    public Text goldText;
     public Slider[] expSlider;
     public Image[] charImage;
     public GameObject[] charStatHolder;
@@ -33,7 +34,7 @@ public class GameMenu : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetButtonDown("Fire2"))
+        if (Input.GetButtonDown("Fire2") && !Shop.instance.shopMenu.activeInHierarchy)
         {
            if (menu.activeInHierarchy)
            {
@@ -77,7 +78,7 @@ public class GameMenu : MonoBehaviour
                 charStatHolder[i].SetActive(false);
             }
         }
-
+        goldText.text = GameManager.instance.currentGold.ToString() + "g";
     }
 
     public void ToggleWindow(int windowNumber)

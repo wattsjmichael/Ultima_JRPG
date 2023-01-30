@@ -71,7 +71,7 @@ GameObject:
   - component: {fileID: 4378577277040506594}
   - component: {fileID: 6112122907641560116}
   m_Layer: 0
-  m_Name: GameManager 1
+  m_Name: GameManager
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -110,6 +110,60 @@ MonoBehaviour:
   - {fileID: 2579093293935110503}
   - {fileID: 9070057813303605075}
   - {fileID: 1402691110865737858}
+  gameMenuOpen: 0
+  dialogActive: 0
+  fadingBetweenAreas: 1
+  shopActive: 0
+  itemsHeld:
+  - 
+  - 
+  - 
+  - Small HP Potion
+  - 
+  - 
+  - 
+  - 
+  - 
+  - Small MP Potion
+  - 
+  - 
+  - 
+  - Copper Sword
+  - 
+  - 
+  - 
+  - 
+  - 
+  - Iron Sword
+  - 
+  - 
+  - 
+  - Leather Armor
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - Iron Armor
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  numberOfItems: 0000000000000000000000000f00000000000000000000000000000000000000000000000a000000000000000000000000000000010000000000000000000000000000000000000000000000020000000000000000000000000000000200000000000000000000000000000000000000000000000000000000000000000000000100000000000000000000000000000000000000000000000000000000000000
+  referenceItems:
+  - {fileID: 3572200692504851500, guid: c01a0359809e3314f910e875d693ad5a, type: 3}
+  - {fileID: 6611028596013237941, guid: ebe50f736c651454ab11df1d0d119799, type: 3}
+  - {fileID: 8419620470761607530, guid: 08769823283bdcb4787b63e6c9219ad4, type: 3}
+  - {fileID: 7649743412148129415, guid: db6b497d39b4ad247b4f1bdc5802f4e3, type: 3}
+  - {fileID: 7475973390657942179, guid: f4df61d994412b6488aa24644dd6f259, type: 3}
+  - {fileID: 4935852649332180933, guid: 60426df08fd769d47baf8e69a6193044, type: 3}
+  currentGold: 99999
 --- !u!1 &1887837095280783900
 GameObject:
   m_ObjectHideFlags: 0
