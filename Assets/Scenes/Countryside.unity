@@ -229,6 +229,11 @@ PrefabInstance:
       propertyPath: theMap
       value: 
       objectReference: {fileID: 1389836515}
+    - target: {fileID: 7303217238695163047, guid: 1b7a82572c561c94d83028a33f7092e4,
+        type: 3}
+      propertyPath: bgmToPlay
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 7303217238695163051, guid: 1b7a82572c561c94d83028a33f7092e4,
         type: 3}
       propertyPath: m_Name

@@ -135,6 +135,7 @@ MonoBehaviour:
   rb: {fileID: 7319006756750385338}
   moveSpeed: 6
   dashSpeed: 12
+  canMove: 1
   playerAnim: {fileID: 7319006756750385337}
   areaTransitionName: 
 --- !u!95 &7319006756750385337

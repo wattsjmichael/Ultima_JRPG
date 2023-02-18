@@ -7,6 +7,7 @@ public class EssentialLoader : MonoBehaviour
     public GameObject UIScreen;
     public GameObject player;
     public GameObject gameManager;
+    public GameObject audioManager;
    
 
     // Start is called before the first frame update
@@ -25,6 +26,10 @@ public class EssentialLoader : MonoBehaviour
         {
            Instantiate(gameManager);
         }
+         if (AudioManager.instance == null)
+         {
+             Instantiate(audioManager);
+         }
     }
 
     // Update is called once per frame

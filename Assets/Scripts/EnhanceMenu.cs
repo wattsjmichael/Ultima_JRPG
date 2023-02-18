@@ -16,7 +16,7 @@ public class EnhanceMenu : MonoBehaviour
     public GameObject failurePrefab;
 
     private GameObject spriteObject;
-    private int stonesAvailable = 1000;
+    private int stonesAvailable;
 
     public Button enhanceButton;
     public Slider successBar;
