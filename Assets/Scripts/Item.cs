@@ -28,51 +28,109 @@ public class Item : MonoBehaviour
         
     }
 
-    public void Use(int charToUseOn)
+   public void Use(int charToUseOn)
     {
-        CharStats selectedChar = GameManager.instance.playerStats[charToUseOn];
-        if(isItem)
+
+        ;
+        if (BattleManager.instance.battleActive)
         {
-            if (effectHP)
+            charToUseOn = BattleManager.instance.currentActiveBattler;
+            
+            
+           
+            
+        }
+
+        CharStats selectedChar = GameManager.instance.playerStats[charToUseOn];
+        
+        
+        if (isItem)
+        {
+            if (selectedChar.currentHP != selectedChar.maxHP)
             {
-                selectedChar.currentHP += amountToChange;
-                Debug.LogError(selectedChar.currentHP);
-                if(selectedChar.currentHP > selectedChar.maxHP)
+                if (effectHP)
                 {
-                    selectedChar.currentHP = selectedChar.maxHP;
+                    selectedChar.currentHP += amountToChange;
+                    if (selectedChar.currentHP > selectedChar.maxHP)
+                    {
+                        selectedChar.currentHP = selectedChar.maxHP;
+                    }
+ 
+                    if (BattleManager.instance.battleActive)
+                    {
+                        charToUseOn = BattleManager.instance.currentActiveBattler;
+                        BattleManager.instance.activeBattlers[charToUseOn].currentHP += amountToChange;
+                        if (BattleManager.instance.activeBattlers[charToUseOn].currentHP > selectedChar.maxHP)
+                        {
+                            BattleManager.instance.activeBattlers[charToUseOn].currentHP = selectedChar.maxHP;
+                        }
+                    }
+                }
+ 
+                GameManager.instance.RemoveItem(itemName);
+            }
+ 
+            if (selectedChar.currentMP != selectedChar.maxMP)
+            {
+                if (effectMP)
+                {
+                    selectedChar.currentMP += amountToChange;
+                    if (selectedChar.currentMP > selectedChar.maxMP)
+                    {
+                        selectedChar.currentMP = selectedChar.maxMP;
+                    }
+ 
+                    if (BattleManager.instance.battleActive)
+                    {
+                        charToUseOn = BattleManager.instance.currentActiveBattler;
+                        BattleManager.instance.activeBattlers[charToUseOn].currentMP += amountToChange;
+                        if (BattleManager.instance.activeBattlers[charToUseOn].currentMP > selectedChar.maxMP)
+                        {
+                            BattleManager.instance.activeBattlers[charToUseOn].currentMP = selectedChar.maxMP;
+                        }
+                    }
+ 
+                    GameManager.instance.RemoveItem(itemName);
                 }
             }
-            if (effectMP)
-            {
-                selectedChar.currentMP += amountToChange;
-                if (selectedChar.currentMP > selectedChar.maxMP)
-                {
-                    selectedChar.currentMP = selectedChar.maxMP;
-                }
-            }
+ 
             if (effectStr)
             {
                 selectedChar.strength += amountToChange;
+ 
+                GameManager.instance.RemoveItem(itemName);
             }
         }
-        if(isWeapon)
+ 
+        if (isWeapon)
         {
-            if(selectedChar.equippedWeapon != "")
+            if (selectedChar.equippedWeapon != "")
             {
                 GameManager.instance.AddItem(selectedChar.equippedWeapon);
             }
+ 
             selectedChar.equippedWeapon = itemName;
             selectedChar.weaponPower = weaponStrength;
+ 
+            GameManager.instance.RemoveItem(itemName);
         }
-        if(isArmor)
+ 
+        if (isArmor)
         {
             if (selectedChar.equippedArmor != "")
             {
                 GameManager.instance.AddItem(selectedChar.equippedArmor);
             }
+ 
             selectedChar.equippedArmor = itemName;
             selectedChar.armorPower = armorStrength;
+ 
+            GameManager.instance.RemoveItem(itemName);
         }
-        GameManager.instance.RemoveItem(itemName);
     }
+
+
+    
+  
+
 }
