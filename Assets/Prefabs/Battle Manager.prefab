@@ -8695,6 +8695,7 @@ MonoBehaviour:
   - {fileID: 5493708032571568770, guid: 6d1427c7c05024e46891c2ce24c2c75f, type: 3}
   - {fileID: 8954724417964393352, guid: 9d896672aed694c418f3b3aa31f3fe62, type: 3}
   - {fileID: 7381034977850125750, guid: 492188f7a43f1874fafd52db3defdf28, type: 3}
+  - {fileID: 2844273875113148770, guid: d71468db9c41da646af15c71305b837c, type: 3}
   activeBattlers: []
   currentActiveBattler: 0
   currentTurn: 0
@@ -8764,6 +8765,8 @@ MonoBehaviour:
   - {fileID: 6223390502042560624}
   battleNotice: {fileID: 6223390501756400440}
   chanceToFlee: 35
+  rewardXP: 0
+  rewardItems: []
   itemMenu: {fileID: 6223390502600886357}
   itemButtons: []
   selectedItem: 

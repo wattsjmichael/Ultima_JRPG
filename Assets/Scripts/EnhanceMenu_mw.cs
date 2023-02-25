@@ -7,98 +7,158 @@ public class EnhanceMenu_mw : MonoBehaviour
 {
     public static EnhanceMenu instance;
     public GameObject enhanceMenu;
-      public int baseSuccessRate = 50;
-public int enhancementLevel;
-public int enhancementAttempts;
-public int currentSuccessRate;
+    public int baseSuccessRate = 50;
+    public int enhancementLevel;
+    public int enhancementAttempts;
+    public int currentSuccessRate;
 
+    private GameObject spriteObject;
+    private int stonesAvailable = 1000;
 
-public GameObject[] levelSprites;
-public GameObject failurePrefab;
+    public Button enhanceButton;
+    public Slider successBar;
+    public Text successRateText;
+    public Text stoneCountText;
 
-private GameObject spriteObject;
-private int stonesAvailable = 10;
+    [Header("Success Window")]
+    public GameObject successWindow;
+    public Text successWindowLevelText;
+    public Text ifSuccessText;
 
-public Button enhanceButton;
-public Slider successBar;
-public Text successRateText;
-public Text stoneCountText;
-
-// Use this for initialization
-void Start()
-{
-    spriteObject = Instantiate(levelSprites[0], transform.position, Quaternion.identity);
-    currentSuccessRate = baseSuccessRate;
-    successRateText.text = currentSuccessRate + "%";
-    stoneCountText.text = "Stones: " + stonesAvailable;
-    enhanceButton.onClick.AddListener(AttemptEnhancement);
-}
-
-public void AttemptEnhancement()
-{
-    int stonesRequired = 1;
-    if (enhancementLevel == 1)
+    // Use this for initialization
+    void Start()
     {
-        stonesRequired = 2;
-    }
-    else if (enhancementLevel == 2)
-    {
-        stonesRequired = 5;
-    }
-    else if (enhancementLevel == 3)
-    {
-        stonesRequired = 7;
+        currentSuccessRate = baseSuccessRate;
+        successRateText.text = "Enhancement Success " + currentSuccessRate + "%";
+        stoneCountText.text = "Stones: " + stonesAvailable;
+        //disable sussess window
+        successWindow.SetActive(false);
+        successBar.value = 0;
     }
 
-    if (stonesAvailable < stonesRequired)
+    void Update()
     {
-        Debug.Log("Not enough stones to perform enhancement");
-        return;
+        successBar.value = 0;
+        if (enhancementLevel >= 10)
+        {
+            Debug.Log("Max enhancement level reached");
+            enhanceButton.GetComponentInChildren<Text>().text = "Max Level";
+            enhanceButton.interactable = false;
+        }
+        else
+        {
+            enhanceButton.GetComponentInChildren<Text>().text = "Enhance";
+        }
     }
 
-    stonesAvailable -= stonesRequired;
-    stoneCountText.text = "Stones: " + stonesAvailable;
-    StartCoroutine(RollForEnhancement());
-}
-
-IEnumerator RollForEnhancement()
-{
-    float time = 0f;
-    while (time < 3f)
+    public void AttemptEnhancement()
     {
-        time += Time.deltaTime;
-        successBar.value = (time / 3) * 100;
-        yield return null;
+        //disable sussess window
+        successWindow.SetActive(false);
+        int stonesRequired = 1;
+
+        if (enhancementLevel == 1)
+        {
+            stonesRequired = 2;
+        }
+        else if (enhancementLevel == 2)
+        {
+            stonesRequired = 5;
+        }
+        else if (enhancementLevel >= 3)
+        {
+            stonesRequired = 7;
+        }
+
+        if (stonesAvailable < stonesRequired)
+        {
+            Debug.Log(stonesRequired);
+            Debug.Log("Not enough stones to perform enhancement");
+            return;
+        }
+
+        stonesAvailable -= stonesRequired;
+        stoneCountText.text = "Stones: " + stonesAvailable;
+        StartCoroutine(RollForEnhancement());
     }
 
-    int randomValue = Random.Range(0, 100);
-    successBar.value = randomValue;
-    if (randomValue < currentSuccessRate)
+    IEnumerator RollForEnhancement()
     {
-        Destroy(spriteObject);
-        spriteObject = Instantiate(levelSprites[enhancementLevel + 1], transform.position, Quaternion.identity);
-        enhancementLevel++;
+        float time = 0f;
+        while (time < 3f)
+        {
+            enhanceButton.GetComponentInChildren<Text>().text = "Enhancing...";
+            successBar.value = 0;
+            //enhanceButton.interactable = false;
+            time += Time.deltaTime;
+            successBar.value = (time / 3) * 100;
+            yield return null;
+        }
+
+        int randomValue = Random.Range(0, 100);
+        successBar.value = randomValue;
         if (enhancementLevel >= 10)
         {
             Debug.Log("Max enhancement level reached");
             yield break;
         }
-        currentSuccessRate = baseSuccessRate - (5 * enhancementLevel);
-        successRateText.text = currentSuccessRate + "%";
-    }
-    else
-    {
-        Destroy(spriteObject);
-        spriteObject = Instantiate(failurePrefab, transform.position, Quaternion.identity);
-        if (enhancementLevel > 3)
+        if (randomValue < currentSuccessRate)
         {
-            enhancementLevel--;
-            Debug.Log("Downgraded to +" + enhancementLevel);
-            spriteObject = Instantiate(levelSprites[enhancementLevel], transform.position, Quaternion.identity);
-        }
-    }
-}
+            successWindow.SetActive(true);
+            successWindowLevelText.text = "Level " + (enhancementLevel + 1);
+            ifSuccessText.text = "Success!";
+            enhancementLevel++;
 
+            currentSuccessRate = baseSuccessRate - (5 * enhancementLevel);
+            successRateText.text = "Enhancement Success " + currentSuccessRate + "%";
+            enhancementAttempts = 0;
+            Debug.Log("Success to +" + enhancementLevel);
+        }
+        else
+        {
+            enhancementAttempts++;
+            if (enhancementLevel == 0)
+            {
+                successWindow.SetActive(true);
+                successWindowLevelText.text = "Still at Level " + (enhancementLevel);
+                ifSuccessText.text = "Failed!!!";
+                Debug.Log("Cannot downgrade further");
+                yield break;
+            }
+            else if (enhancementLevel >= 3)
+            {
+            successWindow.SetActive(true);
+            successWindowLevelText.text = "Item Downgraded to Level " + (enhancementLevel - 1);
+            ifSuccessText.text = "Failed!!!";
+                enhancementLevel--;
+                currentSuccessRate =
+                    baseSuccessRate
+                    - (5 * enhancementLevel)
+                    + (Random.Range(5 * enhancementAttempts, 2 * enhancementAttempts));
+                Debug.Log("Downgraded to +" + enhancementLevel);
+                successRateText.text = "Enhancement Success " + currentSuccessRate + "%";
+                Debug.Log(enhancementAttempts);
+            }
+            else
+            {
+
+            successWindow.SetActive(true);
+            successWindowLevelText.text = "Still at Level " + (enhancementLevel);
+            ifSuccessText.text = "Failed!!!";
+
+                enhancementAttempts++;
+                currentSuccessRate =
+                    baseSuccessRate
+                    - (5 * enhancementLevel)
+                    + (Random.Range(5 * enhancementAttempts, 2 * enhancementAttempts));
+                Debug.Log("Downgraded to +" + enhancementLevel);
+                successRateText.text = "Enhancement Success " + currentSuccessRate + "%";
+                Debug.Log(enhancementAttempts);
+            }
+        }
+        
+        //enhanceButton.interactable = true;
+    }
 
     public void OpenEnhance()
     {

@@ -49,16 +49,16 @@ MonoBehaviour:
   expToNextLevel: 
   maxLevel: 100
   baseExp: 1000
-  currentHP: 1
-  maxHP: 100
+  currentHP: 9999
+  maxHP: 9999
   currentMP: 30
   maxMP: 30
-  strength: 15
-  defense: 15
-  weaponPower: 25
-  armorPower: 25
-  equippedWeapon: 
-  equippedArmor: 
+  strength: 99
+  defense: 99
+  weaponPower: 99
+  armorPower: 99
+  equippedWeapon: Copper Sword
+  equippedArmor: Copper Armor
   charImage: {fileID: 21300000, guid: a911a19aeac24584381d5f95f984d65b, type: 3}
 --- !u!1 &1332707483629245002
 GameObject:
@@ -115,33 +115,12 @@ MonoBehaviour:
   dialogActive: 0
   fadingBetweenAreas: 0
   shopActive: 0
-  enhanceMenuOpen: 0
+  enhanceMenuOpen: 1
   battleActive: 0
   itemsHeld:
   - Small HP Potion
   - 
   - 
-  - Small HP Potion
-  - 
-  - 
-  - 
-  - 
-  - 
-  - Small MP Potion
-  - 
-  - 
-  - 
-  - Copper Sword
-  - 
-  - 
-  - 
-  - 
-  - 
-  - Iron Sword
-  - 
-  - 
-  - 
-  - Leather Armor
   - 
   - 
   - 
@@ -150,7 +129,6 @@ MonoBehaviour:
   - 
   - 
   - 
-  - Iron Armor
   - 
   - 
   - 
@@ -158,7 +136,29 @@ MonoBehaviour:
   - 
   - 
   - 
-  numberOfItems: 2800000000000000000000000f00000000000000000000000000000000000000000000000a000000000000000000000000000000010000000000000000000000000000000000000000000000020000000000000000000000000000000200000000000000000000000000000000000000000000000000000000000000000000000100000000000000000000000000000000000000000000000000000000000000
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  numberOfItems: 05000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
   referenceItems:
   - {fileID: 3572200692504851500, guid: c01a0359809e3314f910e875d693ad5a, type: 3}
   - {fileID: 6611028596013237941, guid: ebe50f736c651454ab11df1d0d119799, type: 3}
@@ -166,8 +166,8 @@ MonoBehaviour:
   - {fileID: 7649743412148129415, guid: db6b497d39b4ad247b4f1bdc5802f4e3, type: 3}
   - {fileID: 7475973390657942179, guid: f4df61d994412b6488aa24644dd6f259, type: 3}
   - {fileID: 4935852649332180933, guid: 60426df08fd769d47baf8e69a6193044, type: 3}
-  currentGold: 500
-  currentStones: 0
+  currentGold: 125
+  currentStones: 125
 --- !u!114 &1446097768
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -263,7 +263,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &4422582286350413554
 Transform:
   m_ObjectHideFlags: 0

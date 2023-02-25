@@ -46,10 +46,10 @@ public class CharStats : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKey(KeyCode.K))
-        {
-            AddExp(1000);
-        }
+        // if (Input.GetKey(KeyCode.K))
+        // {
+        //     AddExp(1000);
+        // }
     }
 
     public void AddExp(int expToAdd)
